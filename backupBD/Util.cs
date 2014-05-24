@@ -10,7 +10,7 @@ namespace backupBD
     {
         public static Dictionary<string, string> settings;
 
-        private static void ReadIniFile()
+        public static void ReadIniFile()
         {
             String iniFile;
             String ruta;

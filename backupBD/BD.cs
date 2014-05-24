@@ -38,6 +38,7 @@ namespace backupBD
                 t1 = TypeBD.SQLServer;
             }
             BDLocal = new BD(server1, port1, database1, user1, password1, t1);
+            BDLocal.openDB();
 
             string server2 = Util.settings.ContainsKey("SERVER.SERVER") && Util.settings["SERVER.SERVER"].Trim() != "" ? "Data Source=" + Util.settings["SERVER.SERVER"] : "";
             string port2 = Util.settings.ContainsKey("SERVER.PORT") && Util.settings["SERVER.PORT"].Trim() != "" ? "," + Util.settings["SERVER.PORT"] : "";
@@ -51,6 +52,7 @@ namespace backupBD
                 t2 = TypeBD.SQLServer;
             }
             BDServer = new BD(server2, port2, database2, user2, password2, t2);
+            BDServer.openDB();
         }
 
 
@@ -142,6 +144,33 @@ namespace backupBD
                     for (int i = 0; i < dr.FieldCount; i++)
                     {
                         result[result.Count - 1].Add(dr[i]);
+                    }
+                }
+                dr.Close();
+            }
+            catch
+            {
+                if (dr != null)
+                {
+                    dr.Close();
+                    dr = null;
+                }
+            }
+            return result;
+        }
+        public List<Dictionary<String,Object>> executeSQL(IDbCommand cmd)
+        {
+            IDataReader dr = null;
+            List<Dictionary<String, Object>> result = new List<Dictionary<String, Object>>();
+            try
+            {
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    result.Add(new Dictionary<String, Object>());
+                    for (int i = 0; i < dr.FieldCount; i++)
+                    {
+                        result[result.Count - 1][dr.GetName(i)]=dr[i];
                     }
                 }
                 dr.Close();
