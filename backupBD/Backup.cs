@@ -26,7 +26,12 @@ namespace backupBD
         {
             if (bD != null && bD.isOpen())
             {
-                if (bD.type == BD.TypeBD.SQLServer) { } else { }
+                if (bD.type == BD.TypeBD.SQLServer)
+                {
+                }
+                else
+                {
+                }
             }
             return null;
         }
