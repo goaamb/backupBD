@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using Goaamb;
 
 namespace backupBD
 {
