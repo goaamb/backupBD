@@ -158,7 +158,7 @@ namespace backupBD
             }
             return result;
         }
-        public List<Dictionary<String,Object>> executeSQL(IDbCommand cmd)
+        public List<Dictionary<String,Object>> executeSQL2(IDbCommand cmd)
         {
             IDataReader dr = null;
             List<Dictionary<String, Object>> result = new List<Dictionary<String, Object>>();
